@@ -1,0 +1,281 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+
+/*
+===============================
+iconButton effect
+===============================
+*/
+.icon-button:hover {
+  transition: all 0.5s;
+}
+
+.icon-button:hover {
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.5);
+}
+
+/*
+===============================
+todo-card effect
+===============================
+*/
+.card-body {
+  transition: all 0.5s !important;
+}
+
+.card-body:hover {
+  padding: 10px 0px;
+}
+
+
+
+
+
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  background-image: linear-gradient(90deg, #0800249e 0%, #090979f5 35%, #00d4ff91 100%)
+}
+
+
+
+@media(max-width:300px) {
+  .icon-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  h6 {
+    font-size: 0.9rem !important;
+    margin-right: 20px !important;
+  }
+
+
+  .css-1edfbbl-MuiGrid2-root {
+    padding: 10 !important;
+
+  }
+
+  .buttons {
+    gap: 4px !important;
+  }
+
+  .delete {
+    margin-left: 15px !important;
+  }
+
+  .css-46bh2p-MuiCardContent-root:last-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+
+  .css-1edfbbl-MuiGrid2-root {
+    width: 61% !important;
+  }
+
+
+  .css-1qwf2xz-MuiGrid2-root {
+    align-items: center;
+  }
+
+  .css-1edfbbl-MuiGrid2-root {
+
+    padding: 8px 0 !important;
+  }
+
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 84% !important;
+    margin-right: 20px !important;
+  }
+
+  .add-btn {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+
+@media (min-width:301px) and (max-width:400px) {
+  .icon-button {
+    width: 35px;
+    height: 35px;
+  }
+
+  h6 {
+    font-size: 0.9rem !important;
+    margin-right: 12px !important;
+  }
+
+
+  .css-1edfbbl-MuiGrid2-root {
+    padding: 10 !important;
+
+  }
+
+  .buttons {
+    position: relative;
+    left: 18px;
+    gap: 6px;
+  }
+
+  .css-x3vexg-MuiGrid2-root {
+    margin-left: 0 !important;
+  }
+
+
+  .css-46bh2p-MuiCardContent-root:last-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+
+  .css-1edfbbl-MuiGrid2-root {
+    width: 61% !important;
+  }
+
+
+  .css-1qwf2xz-MuiGrid2-root {
+    align-items: center;
+  }
+
+  .css-1edfbbl-MuiGrid2-root {
+
+    padding: 8px 0 !important;
+  }
+
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 84% !important;
+    margin-right: 20px !important;
+  }
+
+  .add-btn {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .css-11nsb57-MuiGrid-root>.MuiGrid-item {
+    padding-left: 0px !important
+  }
+}
+
+
+
+@media (min-width:401px) and (max-width:600px) {
+  .icon-button {
+    width: 37px;
+    height: 37px;
+  }
+
+  h6 {
+    font-size: 0.9rem !important;
+    margin-right: 20px !important;
+  }
+
+
+  .css-1edfbbl-MuiGrid2-root {
+    padding: 10 !important;
+
+  }
+
+  .buttons {
+    gap: 6px !important;
+  }
+
+  .delete {
+    margin-left: -20px !important;
+  }
+
+  .css-46bh2p-MuiCardContent-root:last-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+
+  .css-1edfbbl-MuiGrid2-root {
+    width: 61% !important;
+  }
+
+
+  .css-1qwf2xz-MuiGrid2-root {
+    align-items: center;
+  }
+
+  .css-1edfbbl-MuiGrid2-root {
+
+    padding: 8px 0 !important;
+  }
+
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 84% !important;
+    margin-right: 20px !important;
+  }
+
+  .add-btn {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .css-11nsb57-MuiGrid-root>.MuiGrid-item {
+    padding-left: 50px !important;
+  }
+
+}
+
+
+
+@media (min-width:240px) and (max-width:342px) {
+
+  .css-lb7s89-MuiGrid-root {
+    flex-grow: 1 !important;
+    max-width: none !important;
+  }
+
+
+}
