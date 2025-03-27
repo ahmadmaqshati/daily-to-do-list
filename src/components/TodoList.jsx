@@ -1,42 +1,22 @@
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
-import Divider from '@mui/material/Divider';
-
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Grid from "@mui/material/Grid";
-/* import Grid from '@mui/material/Unstable_Grid2'; */
-import TextField from '@mui/material/TextField';
-import { useEffect, useState } from 'react';
-import { jsx } from '@emotion/react';
-
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle'
-/* todo */
+import {
+    Container,
+    Card,
+    CardContent,
+    Button,
+    Typography,
+    Divider,
+    ToggleButton,
+    ToggleButtonGroup,
+    TextField,
+    Stack
+} from '@mui/material';
+import { Add as AddIcon, Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import Todo from './Todo';
-/* unique */
-
-
 
 export default function TodoList() {
 
     return (
         <Container maxWidth="md">
-
-            {/*===============================main card==============================*/}
             < Card sx={{ background: "#7100ffb5", }}>
                 <CardContent>
                     <Typography variant="h3" sx={{ fontWeight: "700", color: "#e22bba" }} >
@@ -45,12 +25,7 @@ export default function TodoList() {
 
                     <Divider style={{ marginTop: "25px" }} />
 
-                    {/*
-                    ==============
-                    Filter Buttons
-                    ===============
-                    */}
-
+                    {/* Filter Buttons */}
                     <ToggleButtonGroup
                         value=''
                         exclusive
@@ -80,44 +55,27 @@ export default function TodoList() {
                     <Todo />
 
 
-                    {/*===All Todos===*/}
-
-                    <Grid container spacing={2} sx={{ marginTop: "20px", alignItems: "center" }}>
-                        {/* حقل إدخال عنوان المهمة */}
-                        <Grid item xs={8}>
-                            <TextField
-                                fullWidth
-                                id="outlined-basic"
-                                label="عنوان المهمة"
-                                variant="outlined"
-                            />
-                        </Grid>
-
-                        {/* زر الإضافة */}
-                        <Grid item xs={4} display="flex" justifyContent="center">
-                            <Button
-                                className="add-btn"
-                                sx={{
-                                    fontSize: "3rem",
-                                    background: "#bf2be2",
-                                    borderRadius: "50%",
-                                    width: "70px",
-                                    height: "70px",
-                                    minWidth: "unset",
-                                }}
-                                variant="contained"
-                            >
-                                <AddIcon />
-                            </Button>
-                        </Grid>
-                    </Grid>
+                    <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
+                        <TextField
+                            style={{ width: "50%" }}
+                            id="outlined-basic"
+                            label="عنوان المهمة"
+                            variant="outlined"
+                        />
 
 
+                        <Button className='add-btn'
+                            style={{ fontSize: "3rem", background: '#bf2be2', borderRadius: "50%", width: "70px", height: "70px", marginLeft: '14%' }}
+                            variant="contained"
+                        >
+                            <AddIcon />
+                        </Button>
+                        {/* === Add-Btn === */}
 
+                    </Stack>
                 </CardContent>
 
             </Card>
-            {/*===============================main card============================*/}
 
         </Container >
 

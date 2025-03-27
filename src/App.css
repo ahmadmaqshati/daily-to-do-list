@@ -42,48 +42,15 @@ todo-card effect
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 body {
   background-image: linear-gradient(90deg, #0800249e 0%, #090979f5 35%, #00d4ff91 100%)
 }
 
-
+.css-1lt5qva-MuiCardContent-root:last-child {
+  padding: 16px !important;
+}
 
 @media(max-width:300px) {
   .icon-button {
@@ -262,20 +229,27 @@ body {
     height: 60px !important;
   }
 
-  .css-11nsb57-MuiGrid-root>.MuiGrid-item {
+  .buttons {
     padding-left: 50px !important;
-  }
 
+  }
 }
 
 
 
-@media (min-width:240px) and (max-width:342px) {
+@media (min-width:240px) and (max-width:359px) {
 
   .css-lb7s89-MuiGrid-root {
     flex-grow: 1 !important;
     max-width: none !important;
   }
 
+  .buttons {
+    margin: 8px 35px 0 0 !important;
+  }
 
+  .icon-button {
+    width: 28px;
+    height: 28px;
+  }
 }
