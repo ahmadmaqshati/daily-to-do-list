@@ -10,30 +10,33 @@ import {
     TextField,
     Stack
 } from '@mui/material';
+
 import { Add as AddIcon, Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import Todo from './Todo';
+import { useState } from 'react';
 
 export default function TodoList() {
 
+    // States
+    const [todos, setTodos] = useState([])
+    const [newTodoTitle, setNewTodoTitle] = useState('')
 
-    const todos = [
-        {
-            id: 1,
-            title: 'المهمة الاولى',
-            details: 'تفاصيل المهمة الاولى',
+    // Function to handling the process of adding a new todo item
+    const addNewTodo = () => {
+        const newTodo = {
+            id: Date.now(),
+            title: newTodoTitle,
+            details: '',
             isCompleted: false
-        },
-        {
-            id: 2,
-            title: 'المهمة الثانية',
-            details: 'تفاصيل المهمة الثانية',
-            isCompleted: false
-        },
-    ]
+        }
+
+        setTodos(prevTodos => [...prevTodos, newTodo]);
+        setNewTodoTitle('')
+    }
 
     return (
         <Container maxWidth="md">
-            < Card sx={{ background: "#7100ffb5", }}>
+            < Card sx={{ background: "#7100ffb5", maxHeight: '840px', overflowY: "auto" }}>
                 <CardContent>
                     <Typography variant="h3" sx={{ fontWeight: "700", color: "#e22bba" }} >
                         مهامي
@@ -69,22 +72,27 @@ export default function TodoList() {
                     {/* render all todos */}
                     {todos.map(todo => <Todo key={todo.id} title={todo.title} details={todo.details} />)}
 
+                    {/* New todo input and button container */}
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
                         <TextField
                             style={{ width: "50%" }}
                             id="outlined-basic"
                             label="عنوان المهمة"
                             variant="outlined"
+                            value={newTodoTitle}
+                            onChange={(e) => {
+                                setNewTodoTitle(e.target.value)
+                            }}
                         />
-
 
                         <Button className='add-btn'
                             style={{ fontSize: "3rem", background: '#bf2be2', borderRadius: "50%", width: "70px", height: "70px", marginLeft: '14%' }}
                             variant="contained"
+                            disabled={!newTodoTitle}
+                            onClick={addNewTodo}
                         >
                             <AddIcon />
                         </Button>
-                        {/* === Add-Btn === */}
 
                     </Stack>
                 </CardContent>

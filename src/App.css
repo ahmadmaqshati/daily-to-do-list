@@ -244,3 +244,28 @@ body {
     margin-right: 0 !important;
   }
 }
+
+
+
+/* تخصيص شكل شريط التمرير */
+::-webkit-scrollbar {
+  width: 8px;
+  /* عرض شريط التمرير */
+}
+
+/* تخصيص لون الخلفية لشريط التمرير */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* تخصيص لون المقبض (المؤشر المتحرك) */
+::-webkit-scrollbar-thumb {
+  background: #39377A;
+  border-radius: 10px;
+}
+
+/* تغيير لون المقبض عند تمرير الماوس فوقه */
+::-webkit-scrollbar-thumb:hover {
+  background: #bf2be2;
+}
