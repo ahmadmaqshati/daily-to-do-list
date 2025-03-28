@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, IconButton } from '@mui/material';
 import Grid from '@mui/material/GridLegacy';
 import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
-export default function Todo() {
+export default function Todo({ title, details }) {
     return (
         <Card className='card-body' sx={{ background: "#00000029", color: 'white', marginTop: 4 }}>
 
@@ -14,10 +14,12 @@ export default function Todo() {
                     <Grid xs={8}>
 
                         <Typography variant="h6" style={{ textAlign: "right" }}>
-                            المهمة الاولى
+                            {/* المهمة الاولى */}
+                            {title}
                         </Typography>
                         <Typography variant="h6" style={{ textAlign: "right" }}>
-                            تفاصيل المهمة الاولى
+                            {/* تفاصيل المهمة الاولى */}
+                            {details}
                         </Typography>
 
                     </Grid>

@@ -15,6 +15,22 @@ import Todo from './Todo';
 
 export default function TodoList() {
 
+
+    const todos = [
+        {
+            id: 1,
+            title: 'المهمة الاولى',
+            details: 'تفاصيل المهمة الاولى',
+            isCompleted: false
+        },
+        {
+            id: 2,
+            title: 'المهمة الثانية',
+            details: 'تفاصيل المهمة الثانية',
+            isCompleted: false
+        },
+    ]
+
     return (
         <Container maxWidth="md">
             < Card sx={{ background: "#7100ffb5", }}>
@@ -50,10 +66,8 @@ export default function TodoList() {
 
                     </ToggleButtonGroup>
 
-                    {/* All Todos */}
-                    <Todo />
-                    <Todo />
-
+                    {/* render all todos */}
+                    {todos.map(todo => <Todo key={todo.id} title={todo.title} details={todo.details} />)}
 
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
                         <TextField
