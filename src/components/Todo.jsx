@@ -1,33 +1,26 @@
 import { Card, CardContent, Typography, IconButton } from '@mui/material';
 import Grid from '@mui/material/GridLegacy';
 import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { Stack } from "@mui/material"
+
 
 export default function Todo({ title, details }) {
     return (
         <Card className='card-body' sx={{ background: "#00000029", color: 'white', marginTop: 4 }}>
-
             <CardContent>
-
-                <Grid container>
-
+                <Stack className='t' direction="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" gap="10px">
                     {/* Task title and details container */}
-                    <Grid xs={8}>
-
-                        <Typography variant="h6" style={{ textAlign: "right" }}>
-                            {/* المهمة الاولى */}
+                    <Stack>
+                        <Typography className='title' variant="h6" style={{ textAlign: "right" }}>
                             {title}
                         </Typography>
-                        <Typography variant="h6" style={{ textAlign: "right" }}>
-                            {/* تفاصيل المهمة الاولى */}
+                        <Typography className='details' variant="h6" style={{ textAlign: "right" }}>
                             {details}
                         </Typography>
-
-                    </Grid>
-
-
+                    </Stack>
 
                     {/* Button container */}
-                    <Grid className='buttons' xs={4} display='flex' justifyContent="space-around" alignItems="center">
+                    <Stack direction="row" spacing={2}>
 
                         {/* Check-Button */}
                         <IconButton
@@ -35,7 +28,8 @@ export default function Todo({ title, details }) {
                             style={{
                                 background: '#FFFFFF',
                                 color: '#8bc34a',
-                                border: "3px solid #8bc34a"
+                                border: "3px solid #8bc34a",
+                                marginLeft: "16px"
                             }}
                         >
                             <CheckIcon />
@@ -55,7 +49,7 @@ export default function Todo({ title, details }) {
 
                         {/* Delete-Button */}
                         <IconButton
-                            className='icon-button delete delete'
+                            className='icon-button delete'
                             style={{
                                 background: "#FFFDFF",
                                 border: "3px solid rgb(244 0 0 / 42%)",
@@ -64,10 +58,9 @@ export default function Todo({ title, details }) {
                         >
                             <DeleteIcon />
                         </IconButton>
-
-                    </Grid>
-                </Grid>
+                    </Stack>
+                </Stack>
             </CardContent>
         </Card>
-    )
+    );
 }

@@ -115,9 +115,12 @@ body {
     height: 35px;
   }
 
+  .delete {
+    margin-left: 0 !important
+  }
+
   h6 {
     font-size: 0.9rem !important;
-    margin-right: 12px !important;
   }
 
 
@@ -182,7 +185,6 @@ body {
 
   h6 {
     font-size: 0.9rem !important;
-    margin-right: 20px !important;
   }
 
 
@@ -195,9 +197,9 @@ body {
     gap: 6px !important;
   }
 
-  .delete {
+  /* .delete {
     margin-left: -20px !important;
-  }
+  } */
 
   .css-46bh2p-MuiCardContent-root:last-child {
     padding-left: 0;
@@ -235,21 +237,10 @@ body {
   }
 }
 
+@media (max-width:300px) {
 
-
-@media (min-width:240px) and (max-width:359px) {
-
-  .css-lb7s89-MuiGrid-root {
-    flex-grow: 1 !important;
-    max-width: none !important;
-  }
-
-  .buttons {
-    margin: 8px 35px 0 0 !important;
-  }
-
-  .icon-button {
-    width: 28px;
-    height: 28px;
+  .title,
+  .details {
+    margin-right: 0 !important;
   }
 }

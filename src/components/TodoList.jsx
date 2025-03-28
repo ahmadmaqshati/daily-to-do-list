@@ -95,29 +95,3 @@ export default function TodoList() {
 
     );
 }
-/* 
- const todosList = [
-        {
-            id: uuidv4(),
-            title: 'المهمة الاولى',
-            details: 'ييييييييييييييي',
-            isComlerted: false
-        },
-        {
-            id: uuidv4(),
-            title: 'المهمة الثانية',
-            details: 'قققققققققق',
-            isComlerted: false
-        },
-        {
-            id: uuidv4(),
-            title: 'المهمة الثالثة',
-            details: 'هنننننننننننن',
-            isComlerted: false
-        }
-    ]
-    const todos = todosList.map((t) => {
-        return <Todo key={t.id} title={t.title} details={t.details} />
-    })
-
-*/
