@@ -13,7 +13,7 @@ import {
 
 import { Add as AddIcon, Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import Todo from './Todo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function TodoList() {
 
@@ -33,6 +33,25 @@ export default function TodoList() {
         setTodos(prevTodos => [...prevTodos, newTodo]);
         setNewTodoTitle('')
     }
+
+
+    // useEffect for Saving todos to localStorage whenever they change
+    useEffect(() => {
+        // Without the condition below, this useEffect would run immediately after the initial render,
+        // and before the second useEffect has finished retrieving the data from localStorage.
+        // This would cause an overwrite, replacing the stored todos with an empty array.
+        if (todos.length > 0) {
+            localStorage.setItem('todo', JSON.stringify(todos));
+        }
+    }, [todos]);
+
+    // useEffect for Retrieving stored todos from localStorage when the component mounts
+    useEffect(() => {
+        // If no todos are found, initialize with an empty array to avoid errors
+        const savedTodos = JSON.parse(localStorage.getItem('todo')) || [];
+        setTodos(savedTodos);
+    }, [])
+
 
     return (
         <Container maxWidth="md">
