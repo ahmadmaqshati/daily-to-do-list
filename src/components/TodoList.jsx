@@ -2,18 +2,15 @@ import {
     Container,
     Card,
     CardContent,
-    Button,
-    Typography,
-    Divider,
     ToggleButton,
     ToggleButtonGroup,
-    TextField,
     Stack
 } from '@mui/material';
 
-import { Add as AddIcon, Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import Todo from './Todo';
 import { useEffect, useState } from 'react';
+import Header from './Header';
+import AddTodoForm from './AddTodoForm';
 
 export default function TodoList() {
 
@@ -21,21 +18,7 @@ export default function TodoList() {
     const [todos, setTodos] = useState([])
     const [newTodoTitle, setNewTodoTitle] = useState('')
 
-    // Function to handling the process of adding a new todo item
-    const addNewTodo = () => {
-        const newTodo = {
-            id: Date.now(),
-            title: newTodoTitle,
-            details: '',
-            isCompleted: false
-        }
-
-        setTodos(prevTodos => [...prevTodos, newTodo]);
-        setNewTodoTitle('')
-    }
-
-
-    // useEffect for Saving todos to localStorage whenever they change
+    // useEffect for saving todos to localStorage whenever the 'todos' state changes
     useEffect(() => {
         // Without the condition below, this useEffect would run immediately after the initial render,
         // and before the second useEffect has finished retrieving the data from localStorage.
@@ -52,16 +35,12 @@ export default function TodoList() {
         setTodos(savedTodos);
     }, [])
 
-
     return (
         <Container maxWidth="md">
             < Card sx={{ background: "#7100ffb5", maxHeight: '840px', overflowY: "auto" }}>
                 <CardContent>
-                    <Typography variant="h3" sx={{ fontWeight: "700", color: "#e22bba" }} >
-                        مهامي
-                    </Typography>
 
-                    <Divider style={{ marginTop: "25px" }} />
+                    <Header />
 
                     {/* Filter Buttons */}
                     <ToggleButtonGroup
@@ -89,31 +68,13 @@ export default function TodoList() {
                     </ToggleButtonGroup>
 
                     {/* render all todos */}
-                    {todos.map(todo => <Todo key={todo.id} title={todo.title} details={todo.details} />)}
+                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} todos={todos} setTodos={setTodos} />)}
 
-                    {/* New todo input and button container */}
+                    {/* Displays the AddTodoForm component*/}
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
-                        <TextField
-                            style={{ width: "50%" }}
-                            id="outlined-basic"
-                            label="عنوان المهمة"
-                            variant="outlined"
-                            value={newTodoTitle}
-                            onChange={(e) => {
-                                setNewTodoTitle(e.target.value)
-                            }}
-                        />
-
-                        <Button className='add-btn'
-                            style={{ fontSize: "3rem", background: '#bf2be2', borderRadius: "50%", width: "70px", height: "70px", marginLeft: '14%' }}
-                            variant="contained"
-                            disabled={!newTodoTitle}
-                            onClick={addNewTodo}
-                        >
-                            <AddIcon />
-                        </Button>
-
+                        <AddTodoForm newTodoTitle={newTodoTitle} setNewTodoTitle={setNewTodoTitle} setTodos={setTodos} />
                     </Stack>
+
                 </CardContent>
 
             </Card>

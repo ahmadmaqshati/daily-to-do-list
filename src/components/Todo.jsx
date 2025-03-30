@@ -1,10 +1,19 @@
 import { Card, CardContent, Typography, IconButton } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
 import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { Stack } from "@mui/material"
 
+export default function Todo({ todoObj, todos, setTodos }) {
 
-export default function Todo({ title, details }) {
+    function addCompletedTask(todoId) {
+        const updatedTodos = todos.map((todo) => {
+            if (todo.id === todoId) {
+                return { ...todo, isCompleted: !todo.isCompleted }
+            }
+            return todo;
+        });
+        setTodos(updatedTodos)
+    }
+
     return (
         <Card className='card-body' sx={{ background: "#00000029", color: 'white', marginTop: 4 }}>
             <CardContent>
@@ -12,10 +21,10 @@ export default function Todo({ title, details }) {
                     {/* Task title and details container */}
                     <Stack>
                         <Typography className='title' variant="h6" style={{ textAlign: "right" }}>
-                            {title}
+                            {todoObj.title}
                         </Typography>
                         <Typography className='details' variant="h6" style={{ textAlign: "right" }}>
-                            {details}
+                            {todoObj.details}
                         </Typography>
                     </Stack>
 
@@ -25,8 +34,12 @@ export default function Todo({ title, details }) {
                         {/* Check-Button */}
                         <IconButton
                             className='icon-button check'
+                            onClick={() => {
+                                addCompletedTask(todoObj.id)
+                            }}
+
                             style={{
-                                background: '#FFFFFF',
+                                background: todoObj.isCompleted ? "green" : '#FFFFFF',
                                 color: '#8bc34a',
                                 border: "3px solid #8bc34a",
                                 marginLeft: "16px"
