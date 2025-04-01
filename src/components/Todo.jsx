@@ -2,17 +2,7 @@ import { Card, CardContent, Typography, IconButton } from '@mui/material';
 import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { Stack } from "@mui/material"
 
-export default function Todo({ todoObj, todos, setTodos }) {
-
-    function addCompletedTask(todoId) {
-        const updatedTodos = todos.map((todo) => {
-            if (todo.id === todoId) {
-                return { ...todo, isCompleted: !todo.isCompleted }
-            }
-            return todo;
-        });
-        setTodos(updatedTodos)
-    }
+export default function Todo({ todoObj, updatedTodos }) {
 
     return (
         <Card className='card-body' sx={{ background: "#00000029", color: 'white', marginTop: 4 }}>
@@ -35,7 +25,7 @@ export default function Todo({ todoObj, todos, setTodos }) {
                         <IconButton
                             className='icon-button check'
                             onClick={() => {
-                                addCompletedTask(todoObj.id)
+                                updatedTodos(todoObj.id)
                             }}
 
                             style={{
@@ -77,3 +67,4 @@ export default function Todo({ todoObj, todos, setTodos }) {
         </Card>
     );
 }
+
