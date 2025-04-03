@@ -58,8 +58,6 @@ export default function TodoList() {
         }))
     }
 
-
-
     return (
         <Container maxWidth="md">
             < Card sx={{ background: "#7100ffb5", maxHeight: '840px', overflowY: "auto" }}>
@@ -87,8 +85,6 @@ export default function TodoList() {
                         <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             الكل
                         </ToggleButton>
-
-
 
                     </ToggleButtonGroup>
 

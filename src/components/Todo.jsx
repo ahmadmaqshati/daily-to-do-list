@@ -1,20 +1,11 @@
 import { Card, CardContent, Typography, IconButton } from '@mui/material';
 import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { Stack } from "@mui/material"
-
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import EditTodoDialog from './EditTodoDialog';
 
 export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
     const [editInput, setEditInput] = React.useState(todoObj.title);
-
-
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -25,8 +16,6 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
     const handleClose = () => {
         setOpen(false);
     };
-
-
 
     return (
         <>
@@ -87,42 +76,8 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
                     </Stack>
                 </CardContent>
             </Card>
+            <EditTodoDialog todoObj={todoObj} open={open} handleTodoEdit={handleTodoEdit} handleClose={handleClose} editInput={editInput} setEditInput={setEditInput} />
 
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                slotProps={{
-                    paper: {
-                        component: 'form',
-                        onSubmit: (event) => {
-                            event.preventDefault();
-                            handleClose()
-                        },
-                    },
-                }}
-            >
-                <DialogTitle>تعديل المهمة</DialogTitle>
-                <DialogContent>
-                    {/* Input field for editing the title */}
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="العنوان"
-                        fullWidth
-                        variant="standard"
-                        style={{ paddingTop: "10px" }}
-                        value={editInput}
-                        onChange={(e) => setEditInput(e.target.value)}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>إلغاء</Button>
-                    <Button type="submit" onClick={() => {
-                        handleTodoEdit(todoObj.id, editInput)
-                    }}>تعديل</Button>
-                </DialogActions>
-            </Dialog>
         </>
 
     );
