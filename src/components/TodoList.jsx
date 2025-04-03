@@ -47,6 +47,19 @@ export default function TodoList() {
         setTodos(updatedTodos)
     }
 
+
+    // Function to handle updating the todo title
+    const handleTodoEdit = (todoId, newTitle) => {
+        setTodos(todos.map((todo) => {
+            if (todo.id === todoId) {
+                return ({ ...todo, title: newTitle })
+            }
+            return todo
+        }))
+    }
+
+
+
     return (
         <Container maxWidth="md">
             < Card sx={{ background: "#7100ffb5", maxHeight: '840px', overflowY: "auto" }}>
@@ -80,7 +93,7 @@ export default function TodoList() {
                     </ToggleButtonGroup>
 
                     {/* render all todos */}
-                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} updatedTodos={toggleTodoCompletion} todos={todos} setTodos={setTodos} />)}
+                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} updatedTodos={toggleTodoCompletion} handleTodoEdit={handleTodoEdit} />)}
 
                     {/* Displays the AddTodoForm component*/}
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>

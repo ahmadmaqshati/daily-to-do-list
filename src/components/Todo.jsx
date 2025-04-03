@@ -11,7 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function Todo({ todoObj, updatedTodos, todos, setTodos }) {
+export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
     const [editInput, setEditInput] = React.useState(todoObj.title);
 
 
@@ -26,15 +26,7 @@ export default function Todo({ todoObj, updatedTodos, todos, setTodos }) {
         setOpen(false);
     };
 
-    // Function to handle updating the todo title
-    const handleTodoEdit = () => {
-        setTodos(todos.map((todo) => {
-            if (todo.id === todoObj.id) {
-                return ({ ...todo, title: editInput })
-            }
-            return todo
-        }))
-    }
+
 
     return (
         <>
@@ -126,11 +118,12 @@ export default function Todo({ todoObj, updatedTodos, todos, setTodos }) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>إلغاء</Button>
-                    <Button type="submit" onClick={handleTodoEdit}>تعديل</Button>
+                    <Button type="submit" onClick={() => {
+                        handleTodoEdit(todoObj.id, editInput)
+                    }}>تعديل</Button>
                 </DialogActions>
             </Dialog>
         </>
 
     );
 }
-
