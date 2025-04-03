@@ -106,6 +106,11 @@ body {
     width: 60px !important;
     height: 60px !important;
   }
+
+  .css-10d30g3-MuiPaper-root-MuiDialog-paper {
+
+    width: 100% !important;
+  }
 }
 
 
@@ -173,6 +178,10 @@ body {
   .css-11nsb57-MuiGrid-root>.MuiGrid-item {
     padding-left: 0px !important
   }
+
+  .css-10d30g3-MuiPaper-root-MuiDialog-paper {
+    width: 100% !important;
+  }
 }
 
 
@@ -196,10 +205,6 @@ body {
   .buttons {
     gap: 6px !important;
   }
-
-  /* .delete {
-    margin-left: -20px !important;
-  } */
 
   .css-46bh2p-MuiCardContent-root:last-child {
     padding-left: 0;
@@ -235,6 +240,11 @@ body {
     padding-left: 50px !important;
 
   }
+
+  .css-10d30g3-MuiPaper-root-MuiDialog-paper {
+
+    width: 100% !important;
+  }
 }
 
 @media (max-width:300px) {
@@ -244,6 +254,13 @@ body {
     margin-right: 0 !important;
   }
 }
+
+
+.css-10d30g3-MuiPaper-root-MuiDialog-paper {
+
+  width: 50%;
+}
+
 
 
 

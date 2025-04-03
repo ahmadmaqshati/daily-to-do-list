@@ -80,7 +80,7 @@ export default function TodoList() {
                     </ToggleButtonGroup>
 
                     {/* render all todos */}
-                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} updatedTodos={toggleTodoCompletion} />)}
+                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} updatedTodos={toggleTodoCompletion} todos={todos} setTodos={setTodos} />)}
 
                     {/* Displays the AddTodoForm component*/}
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
