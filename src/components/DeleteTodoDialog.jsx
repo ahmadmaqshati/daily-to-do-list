@@ -1,20 +1,22 @@
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
 
-export default function EditTodoDialog({ open, handleTodoEdit, handleClose, editInput, setEditInput, todoObj }) {
+
+export default function DeleteTodoDialog({ open, handleClose, handleTodoDelete, todoObj }) {
 
     return (
         <Dialog
             open={open}
             onClose={handleClose}
             dir='rtl'
+
             slotProps={{
                 paper: {
-                    component: 'form',
+
                     onSubmit: (event) => {
                         event.preventDefault();
                         handleClose()
@@ -23,28 +25,23 @@ export default function EditTodoDialog({ open, handleTodoEdit, handleClose, edit
             }}
         >
 
-            <DialogTitle>تعديل المهمة</DialogTitle>
+            <DialogTitle>حذف المهمة</DialogTitle>
 
             <DialogContent>
-                {/* Input field for editing the title */}
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="العنوان"
-                    fullWidth
-                    variant="standard"
-                    style={{ paddingTop: "10px" }}
-                    value={editInput}
-                    onChange={(e) => setEditInput(e.target.value)}
-                />
+
+                <DialogContentText id="alert-dialog-description">
+                    لا يمكنك التراجع عن الحذف في حال اختيار زر(حذف)
+                </DialogContentText>
+
             </DialogContent>
 
             <DialogActions>
                 <Button onClick={handleClose}>إلغاء</Button>
-                <Button type="submit" onClick={() => {
+                <Button type="submit" /* onClick={() => {
                     handleTodoEdit(todoObj.id, editInput)
-                }}>تعديل</Button>
+                }} */onClick={() => {
+                        handleTodoDelete(todoObj.id)
+                    }}>حذف</Button>
             </DialogActions>
 
         </Dialog>

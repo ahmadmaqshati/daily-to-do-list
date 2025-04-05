@@ -1,21 +1,42 @@
 import { Card, CardContent, Typography, IconButton } from '@mui/material';
 import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { Stack } from "@mui/material"
-import * as React from 'react';
 import EditTodoDialog from './EditTodoDialog';
+import DeleteTodoDialog from './DeleteTodoDialog';
+import { useState } from 'react';
 
-export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
-    const [editInput, setEditInput] = React.useState(todoObj.title);
-    const [open, setOpen] = React.useState(false);
+export default function Todo({ todoObj, updatedTodos, handleTodoEdit, handleTodoDelete }) {
+    // State to manage input for edit dialog
+    const [editInput, setEditInput] = useState(todoObj.title);
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    // State to control visibility of the edit dialog
+    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+
+    // State to control visibility of the delete dialog
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
+    // Open edit dialog and set input value
+    const handleOpenEditDialog = () => {
+        setIsEditDialogOpen(true);
         setEditInput(todoObj.title);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    // Close edit dialog
+    const handleCloseEditDialog = () => {
+        setIsEditDialogOpen(false);
     };
+
+    // Open delete dialog
+    const handleOpenDeleteDialog = () => {
+        setIsDeleteDialogOpen(true);
+        setEditInput(todoObj.title);
+    };
+
+    // Close delete dialog
+    const handleCloseDeleteDialog = () => {
+        setIsDeleteDialogOpen(false);
+    };
+
 
     return (
         <>
@@ -32,7 +53,6 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
                             </Typography>
                         </Stack>
 
-                        {/* Action buttons */}
                         <Stack direction="row" spacing={2}>
                             {/* Check-Button */}
                             <IconButton
@@ -56,7 +76,7 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
                                     border: "3px solid #A6C2E7",
                                     color: "#3F5971"
                                 }}
-                                onClick={handleClickOpen}
+                                onClick={handleOpenEditDialog}
                             >
                                 <EditIcon />
                             </IconButton>
@@ -69,6 +89,7 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
                                     border: "3px solid rgb(244 0 0 / 42%)",
                                     color: 'rgb(244 0 0 / 78%)'
                                 }}
+                                onClick={handleOpenDeleteDialog}
                             >
                                 <DeleteIcon />
                             </IconButton>
@@ -76,8 +97,22 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit }) {
                     </Stack>
                 </CardContent>
             </Card>
-            <EditTodoDialog todoObj={todoObj} open={open} handleTodoEdit={handleTodoEdit} handleClose={handleClose} editInput={editInput} setEditInput={setEditInput} />
 
+            <EditTodoDialog
+                todoObj={todoObj}
+                open={isEditDialogOpen}
+                handleTodoEdit={handleTodoEdit}
+                handleClose={handleCloseEditDialog}
+                editInput={editInput}
+                setEditInput={setEditInput}
+            />
+
+            <DeleteTodoDialog
+                todoObj={todoObj}
+                open={isDeleteDialogOpen}
+                handleClose={handleCloseDeleteDialog}
+                handleTodoDelete={handleTodoDelete}
+            />
         </>
 
     );

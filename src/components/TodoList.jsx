@@ -35,7 +35,6 @@ export default function TodoList() {
         setTodos(savedTodos);
     }, [])
 
-
     // Function to toggle the completion status of a specific todo item.
     function toggleTodoCompletion(todoId) {
         const updatedTodos = todos.map((todo) => {
@@ -57,6 +56,12 @@ export default function TodoList() {
             return todo
         }))
     }
+
+    // Function to handle deleting the todo title
+    const handleTodoDelete = (todoId) => {
+        setTodos(todos.filter((todo) => todo.id !== todoId))
+    }
+
 
     return (
         <Container maxWidth="md">
@@ -89,11 +94,11 @@ export default function TodoList() {
                     </ToggleButtonGroup>
 
                     {/* render all todos */}
-                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} updatedTodos={toggleTodoCompletion} handleTodoEdit={handleTodoEdit} />)}
+                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} updatedTodos={toggleTodoCompletion} handleTodoEdit={handleTodoEdit} handleTodoDelete={handleTodoDelete} />)}
 
                     {/* Displays the AddTodoForm component*/}
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
-                        <AddTodoForm newTodoTitle={newTodoTitle} setNewTodoTitle={setNewTodoTitle} setTodos={setTodos} />
+                        <AddTodoForm newTodoTitle={newTodoTitle} setNewTodoTitle={setNewTodoTitle} setTodos={setTodos} todos={todos} />
                     </Stack>
 
                 </CardContent>
