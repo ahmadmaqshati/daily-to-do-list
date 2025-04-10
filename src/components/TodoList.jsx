@@ -78,15 +78,22 @@ export default function TodoList() {
                         aria-label="text alignment"
                         style={{ direction: "ltr", marginTop: "30px" }}
                     >
-                        <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
+                        <ToggleButton
+                            onClick={() => {
+                                setTodos([])
+                            }}
+                            style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             مسح الكل
                         </ToggleButton>
+
                         <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             غير منجز
                         </ToggleButton>
+
                         <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             منجز
                         </ToggleButton>
+
                         <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             الكل
                         </ToggleButton>
