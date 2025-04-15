@@ -18,22 +18,25 @@ export default function TodoList() {
     const [todos, setTodos] = useState([])
     const [newTodoTitle, setNewTodoTitle] = useState('')
 
-    // useEffect for saving todos to localStorage whenever the 'todos' state changes
+    // Helps prevent overwriting stored todos with an empty array on initial load
+    const [isTodosInitialized, setIsTodosInitialized] = useState(false);
+
     useEffect(() => {
-        // Without the condition below, this useEffect would run immediately after the initial render,
-        // and before the second useEffect has finished retrieving the data from localStorage.
-        // This would cause an overwrite, replacing the stored todos with an empty array.
-        if (todos.length > 0) {
+        // This effect runs every time 'todos' changes
+        // But it will only update localStorage if data has been loaded
+        if (isTodosInitialized) {
             localStorage.setItem('todo', JSON.stringify(todos));
         }
+
     }, [todos]);
 
-    // useEffect for Retrieving stored todos from localStorage when the component mounts
     useEffect(() => {
-        // If no todos are found, initialize with an empty array to avoid errors
+        // This effect runs once on component mount
+        // Try to load todos from localStorage
         const savedTodos = JSON.parse(localStorage.getItem('todo')) || [];
         setTodos(savedTodos);
-    }, [])
+        setIsTodosInitialized(true);
+    }, []);
 
     // Function to toggle the completion status of a specific todo item.
     function toggleTodoCompletion(todoId) {
@@ -57,9 +60,16 @@ export default function TodoList() {
         }))
     }
 
-    // Function to handle deleting the todo title
+
+    //function to delete specific todo item
     const handleTodoDelete = (todoId) => {
-        setTodos(todos.filter((todo) => todo.id !== todoId))
+        setTodos(todos.filter((todo) => {
+            if (todo.id === todoId) {
+                return false
+            } else {
+                return true
+            }
+        }))
     }
 
 
@@ -78,22 +88,22 @@ export default function TodoList() {
                         aria-label="text alignment"
                         style={{ direction: "ltr", marginTop: "30px" }}
                     >
-                        <ToggleButton
-                            onClick={() => {
-                                setTodos([])
-                            }}
-                            style={{ color: "#ffffffc9", fontWeight: "900" }}>
+
+
+
+                        <ToggleButton onClick={() => {
+                            setTodos([])
+                            localStorage.setItem('todo', JSON.stringify([]));
+                        }} style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             مسح الكل
                         </ToggleButton>
 
                         <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             غير منجز
                         </ToggleButton>
-
                         <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             منجز
                         </ToggleButton>
-
                         <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             الكل
                         </ToggleButton>
@@ -105,7 +115,7 @@ export default function TodoList() {
 
                     {/* Displays the AddTodoForm component*/}
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
-                        <AddTodoForm newTodoTitle={newTodoTitle} setNewTodoTitle={setNewTodoTitle} setTodos={setTodos} todos={todos} />
+                        <AddTodoForm newTodoTitle={newTodoTitle} setNewTodoTitle={setNewTodoTitle} setTodos={setTodos} />
                     </Stack>
 
                 </CardContent>
