@@ -4,8 +4,9 @@ import { Stack } from "@mui/material"
 import EditTodoDialog from './EditTodoDialog';
 import DeleteTodoDialog from './DeleteTodoDialog';
 import { useState } from 'react';
-
-export default function Todo({ todoObj, updatedTodos, handleTodoEdit, handleTodoDelete }) {
+import { TodosContexts } from '../contexts/todosContexts';
+import { useContext } from 'react';
+export default function Todo({ todoObj }) {
     // State to manage input for edit dialog
     const [editInput, setEditInput] = useState(todoObj.title);
 
@@ -37,6 +38,29 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit, handleTodo
         setIsDeleteDialogOpen(false);
     };
 
+    const { todos, setTodos } = useContext(TodosContexts)
+
+    // Toggle the completion status of a specific todo item.
+    const toggleTodoCompletion = (todoId) => {
+        setTodos(todos.map((todo) =>
+            todo.id === todoId ? { ...todo, isCompleted: !todo.isCompleted } : todo
+
+        ))
+    }
+
+    // Handle updating the todo title
+    const handleTodoEdit = (todoId, newTitle) => {
+        setTodos(todos.map((todo) =>
+            todo.id === todoId ? { ...todo, title: newTitle } : todo
+        ))
+    }
+
+    // Delete specific todo item
+    const handleTodoDelete = (todoId) => {
+        setTodos(todos.filter((todo) =>
+            todo.id != todoId
+        ))
+    }
 
     return (
         <>
@@ -57,7 +81,8 @@ export default function Todo({ todoObj, updatedTodos, handleTodoEdit, handleTodo
                             {/* Check-Button */}
                             <IconButton
                                 className='icon-button check'
-                                onClick={() => { updatedTodos(todoObj.id); }}
+                                onClick={() => toggleTodoCompletion(todoObj.id)}
+
                                 style={{
                                     background: todoObj.isCompleted ? "green" : '#FFFFFF',
                                     color: '#8bc34a',

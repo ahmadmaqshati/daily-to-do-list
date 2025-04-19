@@ -41,10 +41,12 @@ export default function EditTodoDialog({ open, handleTodoEdit, handleClose, edit
             </DialogContent>
 
             <DialogActions>
+
                 <Button onClick={handleClose}>إلغاء</Button>
-                <Button type="submit" onClick={() => {
-                    handleTodoEdit(todoObj.id, editInput)
-                }}>تعديل</Button>
+                <Button type="submit" onClick={() => handleTodoEdit(todoObj.id, editInput)}>
+                    تعديل
+                </Button>
+
             </DialogActions>
 
         </Dialog>

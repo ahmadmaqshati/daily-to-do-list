@@ -36,12 +36,12 @@ export default function DeleteTodoDialog({ open, handleClose, handleTodoDelete, 
             </DialogContent>
 
             <DialogActions>
+
                 <Button onClick={handleClose}>إلغاء</Button>
-                <Button type="submit" /* onClick={() => {
-                    handleTodoEdit(todoObj.id, editInput)
-                }} */onClick={() => {
-                        handleTodoDelete(todoObj.id)
-                    }}>حذف</Button>
+                <Button type="submit" onClick={() => handleTodoDelete(todoObj.id)}>
+                    حذف
+                </Button>
+
             </DialogActions>
 
         </Dialog>
