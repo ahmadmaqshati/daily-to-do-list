@@ -3,42 +3,25 @@ import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui
 import { Stack } from "@mui/material"
 import EditTodoDialog from './EditTodoDialog';
 import DeleteTodoDialog from './DeleteTodoDialog';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TodosContexts } from '../contexts/todosContexts';
+import { ModalContext } from '../contexts/modalContext';
 import { useContext } from 'react';
 export default function Todo({ todoObj }) {
-    // State to manage input for edit dialog
-    const [editInput, setEditInput] = useState(todoObj.title);
-
-    // State to control visibility of the edit dialog
-    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-
-    // State to control visibility of the delete dialog
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-
-    // Open edit dialog and set input value
-    const handleOpenEditDialog = () => {
-        setIsEditDialogOpen(true);
-        setEditInput(todoObj.title);
-    };
-
-    // Close edit dialog
-    const handleCloseEditDialog = () => {
-        setIsEditDialogOpen(false);
-    };
-
-    // Open delete dialog
-    const handleOpenDeleteDialog = () => {
-        setIsDeleteDialogOpen(true);
-        setEditInput(todoObj.title);
-    };
-
-    // Close delete dialog
-    const handleCloseDeleteDialog = () => {
-        setIsDeleteDialogOpen(false);
-    };
 
     const { todos, setTodos } = useContext(TodosContexts)
+
+    const {
+        isEditDialogOpen,
+        isDeleteDialogOpen,
+        handleOpenEditDialog,
+        handleCloseEditDialog,
+        handleOpenDeleteDialog,
+        handleCloseDeleteDialog,
+        editInput,
+        setEditInput,
+    } = useContext(ModalContext)
+
 
     // Toggle the completion status of a specific todo item.
     const toggleTodoCompletion = (todoId) => {
@@ -101,7 +84,7 @@ export default function Todo({ todoObj }) {
                                     border: "3px solid #A6C2E7",
                                     color: "#3F5971"
                                 }}
-                                onClick={handleOpenEditDialog}
+                                onClick={() => handleOpenEditDialog(todoObj.title)}
                             >
                                 <EditIcon />
                             </IconButton>
@@ -114,7 +97,8 @@ export default function Todo({ todoObj }) {
                                     border: "3px solid rgb(244 0 0 / 42%)",
                                     color: 'rgb(244 0 0 / 78%)'
                                 }}
-                                onClick={handleOpenDeleteDialog}
+                                onClick={() => handleOpenDeleteDialog(todoObj.title)}
+
                             >
                                 <DeleteIcon />
                             </IconButton>
