@@ -3,7 +3,6 @@ import { Check as CheckIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui
 import { Stack } from "@mui/material"
 import EditTodoDialog from './EditTodoDialog';
 import DeleteTodoDialog from './DeleteTodoDialog';
-import { useEffect, useState } from 'react';
 import { TodosContexts } from '../contexts/todosContexts';
 import { ModalContext } from '../contexts/modalContext';
 import { useContext } from 'react';
@@ -12,14 +11,10 @@ export default function Todo({ todoObj }) {
     const { todos, setTodos } = useContext(TodosContexts)
 
     const {
-        isEditDialogOpen,
         isDeleteDialogOpen,
         handleOpenEditDialog,
-        handleCloseEditDialog,
         handleOpenDeleteDialog,
         handleCloseDeleteDialog,
-        editInput,
-        setEditInput,
     } = useContext(ModalContext)
 
 
@@ -31,12 +26,6 @@ export default function Todo({ todoObj }) {
         ))
     }
 
-    // Handle updating the todo title
-    const handleTodoEdit = (todoId, newTitle) => {
-        setTodos(todos.map((todo) =>
-            todo.id === todoId ? { ...todo, title: newTitle } : todo
-        ))
-    }
 
     // Delete specific todo item
     const handleTodoDelete = (todoId) => {
@@ -84,7 +73,7 @@ export default function Todo({ todoObj }) {
                                     border: "3px solid #A6C2E7",
                                     color: "#3F5971"
                                 }}
-                                onClick={() => handleOpenEditDialog(todoObj.title)}
+                                onClick={() => handleOpenEditDialog(todoObj.id, todoObj.title)}
                             >
                                 <EditIcon />
                             </IconButton>
@@ -108,12 +97,6 @@ export default function Todo({ todoObj }) {
             </Card>
 
             <EditTodoDialog
-                todoObj={todoObj}
-                open={isEditDialogOpen}
-                handleTodoEdit={handleTodoEdit}
-                handleClose={handleCloseEditDialog}
-                editInput={editInput}
-                setEditInput={setEditInput}
             />
 
             <DeleteTodoDialog

@@ -1,32 +1,43 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import { useContext } from 'react';
+import { ModalContext } from '../contexts/modalContext';
+import { TodosContexts } from '../contexts/todosContexts';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 
-export default function EditTodoDialog({ open, handleTodoEdit, handleClose, editInput, setEditInput, todoObj }) {
+export default function EditTodoDialog() {
+    const {
+        isEditDialogOpen,
+        editInput,
+        setEditInput,
+        editTodoId,
+        handleCloseEditDialog
+    } = useContext(ModalContext);
+
+    const { todos, setTodos } = useContext(TodosContexts);
+
+    const handleTodoEdit = (todoId, newTitle) => {
+        setTodos(todos.map(todo =>
+            todo.id === todoId ? { ...todo, title: newTitle } : todo
+        ));
+    };
 
     return (
         <Dialog
-            open={open}
-            onClose={handleClose}
+            open={isEditDialogOpen}
+            onClose={handleCloseEditDialog}
             dir='rtl'
             slotProps={{
                 paper: {
                     component: 'form',
                     onSubmit: (event) => {
                         event.preventDefault();
-                        handleClose()
+
+                        handleCloseEditDialog();
                     },
                 },
             }}
         >
-
             <DialogTitle>تعديل المهمة</DialogTitle>
-
             <DialogContent>
-                {/* Input field for editing the title */}
                 <TextField
                     autoFocus
                     margin="dense"
@@ -39,16 +50,12 @@ export default function EditTodoDialog({ open, handleTodoEdit, handleClose, edit
                     onChange={(e) => setEditInput(e.target.value)}
                 />
             </DialogContent>
-
             <DialogActions>
-
-                <Button onClick={handleClose}>إلغاء</Button>
-                <Button type="submit" onClick={() => handleTodoEdit(todoObj.id, editInput)}>
-                    تعديل
-                </Button>
-
+                <Button onClick={handleCloseEditDialog}>إلغاء</Button>
+                <Button type="submit" onClick={() => {
+                    handleTodoEdit(editTodoId, editInput);
+                }}>تعديل</Button>
             </DialogActions>
-
         </Dialog>
-    )
+    );
 }

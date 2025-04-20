@@ -10,6 +10,8 @@ function App() {
   const [todos, setTodos] = useState([])
 
   const [editInput, setEditInput] = useState("");
+  const [editTodoId, setEditTodoId] = useState(null);
+
 
   // State to control visibility of the edit dialog
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -18,7 +20,8 @@ function App() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
 
-  const handleOpenEditDialog = (todoTitle) => {
+  const handleOpenEditDialog = (todoId, todoTitle) => {
+    setEditTodoId(todoId)
     setEditInput(todoTitle);
     setIsEditDialogOpen(true);
   };
@@ -49,6 +52,8 @@ function App() {
           isDeleteDialogOpen,
           editInput,
           setEditInput,
+          editTodoId,
+          setEditTodoId,
           handleOpenEditDialog,
           handleCloseEditDialog,
           handleOpenDeleteDialog,
