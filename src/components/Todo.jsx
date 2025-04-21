@@ -11,10 +11,8 @@ export default function Todo({ todoObj }) {
     const { todos, setTodos } = useContext(TodosContexts)
 
     const {
-        isDeleteDialogOpen,
         handleOpenEditDialog,
         handleOpenDeleteDialog,
-        handleCloseDeleteDialog,
     } = useContext(ModalContext)
 
 
@@ -23,14 +21,6 @@ export default function Todo({ todoObj }) {
         setTodos(todos.map((todo) =>
             todo.id === todoId ? { ...todo, isCompleted: !todo.isCompleted } : todo
 
-        ))
-    }
-
-
-    // Delete specific todo item
-    const handleTodoDelete = (todoId) => {
-        setTodos(todos.filter((todo) =>
-            todo.id != todoId
         ))
     }
 
@@ -86,7 +76,7 @@ export default function Todo({ todoObj }) {
                                     border: "3px solid rgb(244 0 0 / 42%)",
                                     color: 'rgb(244 0 0 / 78%)'
                                 }}
-                                onClick={() => handleOpenDeleteDialog(todoObj.title)}
+                                onClick={() => handleOpenDeleteDialog(todoObj.id)}
 
                             >
                                 <DeleteIcon />
@@ -96,15 +86,9 @@ export default function Todo({ todoObj }) {
                 </CardContent>
             </Card>
 
-            <EditTodoDialog
-            />
+            <EditTodoDialog />
 
-            <DeleteTodoDialog
-                todoObj={todoObj}
-                open={isDeleteDialogOpen}
-                handleClose={handleCloseDeleteDialog}
-                handleTodoDelete={handleTodoDelete}
-            />
+            <DeleteTodoDialog />
         </>
 
     );
