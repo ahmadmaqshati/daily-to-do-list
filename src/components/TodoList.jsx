@@ -13,6 +13,7 @@ import Header from './Header';
 import AddTodoForm from './AddTodoForm';
 import { TodosContexts } from '../contexts/todosContexts';
 import { useContext } from 'react';
+import FilterToggleGroup from './FilterToggleGroup';
 
 
 export default function TodoList() {
@@ -20,6 +21,7 @@ export default function TodoList() {
     const { todos, setTodos } = useContext(TodosContexts)
 
     const [newTodoTitle, setNewTodoTitle] = useState('')
+    const [displayTodoType, setDisplayTodoType] = useState(null)
 
     // Helps prevent overwriting stored todos with an empty array on initial load
     const [isTodosInitialized, setIsTodosInitialized] = useState(false);
@@ -41,6 +43,20 @@ export default function TodoList() {
         setIsTodosInitialized(true);
     }, []);
 
+    // Filter completed todos
+    const completedTodos = todos.filter((todo) => todo.isCompleted)
+    // Filter non-completed todos
+    const nonCompletedTodos = todos.filter((todo) => !todo.isCompleted)
+
+    // Decide which list of todos to render based on displayTodoType
+    let todosToBeRendered = null
+    if (displayTodoType === 'completed') {
+        todosToBeRendered = completedTodos
+    } else if (displayTodoType === 'non-completed') {
+        todosToBeRendered = nonCompletedTodos
+    } else {
+        todosToBeRendered = todos
+    }
 
     return (
         <Container maxWidth="md">
@@ -50,37 +66,10 @@ export default function TodoList() {
                     <Header />
 
                     {/* Filter Buttons */}
-                    <ToggleButtonGroup
-                        value=''
-                        exclusive
+                    <FilterToggleGroup setTodos={setTodos} displayTodoType={displayTodoType} setDisplayTodoType={setDisplayTodoType} />
 
-                        aria-label="text alignment"
-                        style={{ direction: "ltr", marginTop: "30px" }}
-                    >
-
-
-
-                        <ToggleButton onClick={() => {
-                            setTodos([])
-                            localStorage.setItem('todo', JSON.stringify([]));
-                        }} style={{ color: "#ffffffc9", fontWeight: "900" }}>
-                            مسح الكل
-                        </ToggleButton>
-
-                        <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
-                            غير منجز
-                        </ToggleButton>
-                        <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
-                            منجز
-                        </ToggleButton>
-                        <ToggleButton style={{ color: "#ffffffc9", fontWeight: "900" }}>
-                            الكل
-                        </ToggleButton>
-
-                    </ToggleButtonGroup>
-
-                    {/* render all todos */}
-                    {todos.map(todo => <Todo key={todo.id} todoObj={todo} />)}
+                    {/* Render the list of todos */}
+                    {todosToBeRendered.map(todo => <Todo key={todo.id} todoObj={todo} />)}
 
                     {/* Displays the AddTodoForm component*/}
                     <Stack direction="row" sx={{ marginTop: "32px", justifyContent: "space-between" }}>
